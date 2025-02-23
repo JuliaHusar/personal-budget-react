@@ -2,10 +2,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom"
 
-import './App.css';
+import './App.scss';
 import React from 'react';
 import Menu from './Menu/Menu'
 import Hero from './Hero/Hero'
@@ -32,7 +31,6 @@ function App() {
           </Route>
         </Switch>
       </div>
-      <HomePage/>
       <Footer/>
     </Router>
   );

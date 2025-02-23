@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, Tooltip, Legend } from "chart.js";
 import axios from "axios";
+import D3js from "../D3JS/DataThree";
+import { Chart, Pie } from "react-chartjs-2";
+import PieChart from "../PieChart/PieChart";
 
 function HomePage() {
-    const [data, setData] = useState();
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
     const header = "http://localhost:8000"
 
-    ChartJS
     async function getData(params) {
         axios.get(header + '/budget').then(function (response){
-            setData(response);
-        })
+            setData(response)
+            setLoading(false)
+        });
     }
 
     // On Mount I want this to fetch data from the backend server and assign it to a local variable
@@ -97,12 +101,19 @@ function HomePage() {
                 {/* This is an A11y Change */}
                 <h2>Chart</h2>
                 <p>
-                    
+                    {!loading &&(
+                        <PieChart data={data}>
+                        </PieChart>
+                    )}
                 </p>
             </section>
             <section className="text-box" id="d3jsChart">
                 {/* This is an A11y Change */}
                 <h2>D3JS Chart</h2>
+                {!loading &&(
+                    <D3js data={data}>
+                    </D3js>
+                )}
             </section>  
             {/* This is a Semantic HTML Change */}
         </article>
